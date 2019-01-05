@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    {% if session.logged_in %}  
+
+    {% else %}
+    <a class="navbar-brand" href="/">College of Our Lady of Mercy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    {% endif %}
+<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+<ul class="navbar-nav mr-auto">
+    {% if session.logged_in %}        
+    <li class="nav-item">
+        <a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/notifications">Notification</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/messages">Messages</a>
+    </li>     
+    {% endif %}    
+</ul>
+<ul class="navbar-nav navbar-right" style="font-family: 'Droid Sans', Georgia, Times, serif;">
+    {% if session.logged_in %}        
+    <li class="nav-item">
+        <a class="nav-link" href="/dashboard">Dashboard</a>
+    </li> 
+    <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+    </li> 
+    {% else %}
+    <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/academics">Academics</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/basic-education">Basic Education</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/gallery">Gallery</a>
+    </li>  
+    <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact Us</a>
+    </li>         
+     {% endif %}   
+</ul>
+
+</div>
+</nav>

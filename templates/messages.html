@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+   
+        <div class="row">           
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-title">
+                        Trending <small><a href="#">Change</a></small>                        
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">Tweets</div>
+                            <div class="col">Following</div>
+                            <div class="col">Followers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>                   
+            <div class="col-md-6">
+               
+                {% for tweet in tweets %}
+                <div>
+                    <small>Recent tweet from  @{{tweet.username}} </small> <br>
+                    <b><a href="#">Name </a></b> @{{tweet.username}} · Time
+                    <p> {{ tweet.tweet}}</p>                    
+                </div>
+                {% endfor %}                
+           
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light mb-3" >
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Light card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+
+{% endblock %}
