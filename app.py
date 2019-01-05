@@ -69,47 +69,6 @@ def register():
     else:        
         return render_template('register.html', form=form)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == "POST":
-        username = request.form['username']
-        password = request.form['password']
-
-        cur = mysql.connection.cursor
-    else:
-        return render_template('login.html')
-
-@app.route('/dashboard', methods=['GET', 'POST'])
-def dashboard():
-    if request.method == "POST":
-        tweet = request.form['tweet']
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO tweets (username, tweet) VALUES (%s, %s, %s)", (session['username'], tweet))
-        # COMMIT TO DB
-        mysql.connection.commit()
-        # CLOSE CONNECTION TO DB
-        cur.close()
-        return render_template('dashboard.html')
-    else:
-        cur = mysql.connection.cursor()
-        result = cur.execute("SELECT * FROM tweets")
-        tweets = cur.fetchall()
-        if result > 0:
-            return render_template('dashboard.html', tweets = tweets)    
-        else:
-            flash("No articles found.", 'warning')
-            return render_template('articles.html')
-    cur.close()
-
-@app.route('/notifications')
-def notifications():
-    cur = mysql.connection.cursor()
-    result = cur.execute("SELECT * FROM tweets")
-    tweets = cur.fetchall()
-    if result > 0:
-        return render_template('notifications.html', tweets = tweets)   
-    else:
-        return render_template('notifications.html')
 
 @app.route('/messages')
 def messages():
@@ -131,11 +90,35 @@ def basic_education():
 def gallery():
     return render_template('gallery.html')
 
+# FOR ADMINISTRATOR PAGE
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['password']
+
+        cur = mysql.connection.cursor()
+        result = cur.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+        if result > 0:
+            return redirect(url_for('dashboard'))
+        else:
+            flash("Username or password is inccorect. Please try again.")
+    else:
+        return render_template('login.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('admin/dashboard.html')
+
+
 @app.route('/logout')
 def logout():
     session.clear()
     flash("You are now logged out.", 'success')
     return redirect(url_for('login'))
+
 
 if __name__ == '__main__':
     app.secret_key='secret1235'
