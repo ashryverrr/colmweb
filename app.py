@@ -114,6 +114,22 @@ def notifications():
 def messages():
     return render_template('messages.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/academics')
+def academics():
+    return render_template('about.html')
+
+@app.route('/basic-education')
+def basic_education():
+    return render_template('basic-education.html')
+
+@app.route('/gallery')
+def gallery():
+    return render_template('gallery.html')
+
 @app.route('/logout')
 def logout():
     session.clear()
