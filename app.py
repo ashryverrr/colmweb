@@ -51,6 +51,7 @@ def register():
         username = form.username.data
         email = form.email.data
         password = sha256_crypt.encrypt(str(form.password.data))
+        accountType = "admin"
         # OPEN SQL CONNECTION
         cur = mysql.connection.cursor()
         # CHECK IF USERNAME OR PASSWORD ALREADY EXISTS
@@ -59,7 +60,7 @@ def register():
             flash("Username or email is already used.", 'danger')
         else:                      
             # RUN QUERY
-            cur.execute("INSERT INTO users (email, username, firstName, lastName, password) VALUES (%s, %s, %s, %s, %s)", (email, username, firstName, lastName, password ))
+            cur.execute("INSERT INTO users (email, username, firstName, lastName, password, accountType) VALUES (%s, %s, %s, %s, %s, %s)", (email, username, firstName, lastName, password, accountType ))
             # SAVE TO DATABASE
             mysql.connection.commit()        
             cur.close
