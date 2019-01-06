@@ -77,7 +77,7 @@ def about():
 
 @app.route('/academics')
 def academics():
-    return render_template('about.html')
+    return render_template('academics.html')
 
 @app.route('/basic-education')
 def basic_education():
