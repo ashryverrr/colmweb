@@ -26,9 +26,6 @@ mysql =  MySQL(app)
 def index():
     return render_template('home.html')
 
-
-
-
 ###### REGISTER FORM ########
 class RegisterForm(Form):
     firstName = StringField('First Name', [validators.Length(min=1, max=50)])
@@ -97,16 +94,28 @@ def gallery():
 def login():
     if request.method == "POST":
         username = request.form['username']
-        password = request.form['password']
+        password_candidate = request.form['password']
 
         cur = mysql.connection.cursor()
-        result = cur.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
+        result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
         if result > 0:
-            return redirect(url_for('dashboard'))
+            #GET PASSWORD HASH
+            data = cur.fetchone()
+            password = data['password']
+            #VALIDATE PASSWORD
+            if sha256_crypt.verify(password_candidate, password):
+                session['logged_in'] = True
+                session['username'] = username
+                
+                flash("Your are now logged in.", 'success')
+                return redirect(url_for('dashboard'))
+            else:
+                flash("Password is incorrect.", 'danger')
+            # CLOSE DB CONNECTION
+            cur.close()
         else:
-            flash("Username or password is inccorect. Please try again.")
-    else:
-        return render_template('login.html')
+            flash("Username is incorrect.", 'danger')
+    return render_template('login.html')
 
 @app.route('/dashboard')
 def dashboard():
