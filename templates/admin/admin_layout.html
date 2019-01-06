@@ -6,20 +6,18 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
             <title>AdminLTE 2 | Blank Page</title>
             <link href="{{ url_for('static', filename='css/bootstrapLTE.css')}}" rel="stylesheet">
-            <link href="{{ url_for('static', filename='css/custom.css')}}" rel="stylesheet">
-            <!-- Theme style -->
-            <link href="{{ url_for('static', filename='css/ionicons.min.css')}}" rel="stylesheet">  
-            <link href="{{ url_for('static', filename='css/AdminLTE.min.css')}}" rel="stylesheet">
-            <link href="{{ url_for('static', filename='css/skins/_all-skins.min.css')}}" rel="stylesheet">
-                      
+            <!-- <link href="{{ url_for('static', filename='css/custom.css')}}" rel="stylesheet"> -->
             <!-- Theme style -->
             <link href="{{ url_for('static', filename='css/font-awesome.min.css')}}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/ionicons.min.css')}}" rel="stylesheet">              
+            <link href="{{ url_for('static', filename='css/skins/_all-skins.min.css')}}" rel="stylesheet">
+            <link href="{{ url_for('static', filename='css/AdminLTE.min.css')}}" rel="stylesheet">                      
+            <!-- Theme style -->            
             <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/logo.png')}}">
             <link href="https://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
             {{ moment.include_jquery() }}
-            {{ moment.include_moment() }}     
-          
+            {{ moment.include_moment() }}             
             
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -77,10 +75,10 @@
       </div>
     </nav>
   </header>
-
+  
+  <!-- ================== INCLUDE SIDEBAR ============================= -->
   {% include '/includes/_admin_navbar.html' %}
-
-  <!-- =============================================== -->
+  <!-- ====================== END SIDEBAR ========================= -->
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -142,17 +140,19 @@
 
 
 
-<script>
-  $(document).ready(function () {
-    $('.sidebar-menu').tree()
-  })
-</script>
+
+<script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
- <script src="{{ url_for('static', filename='js/adminlte.js')}}"></script>
- <script src="{{ url_for('static', filename='js/bootstrapLTE.js')}}"></script> 
+ <script src="{{ url_for('static', filename='js/bootstrap.js')}}"></script>
+ <script src="{{ url_for('static', filename='js/adminLTE.js')}}"></script>
  <script src="{{ url_for('static', filename='fontawesome/js/all.js')}}"></script>
  <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+ <script>
+        $(document).ready(function () {
+          $('.sidebar-menu').tree()
+        })
+ </script>
  <script type="text/javascript">
      //CKEDITOR.replace('editor')
      ClassicEditor
