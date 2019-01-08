@@ -140,7 +140,14 @@ def dashboard():
     else:        
         return render_template('admin/dashboard.html', form=form)
 
-
+@app.route('/blog')
+def blog():
+    cur = mysql.connection.cursor() 
+    cur.execute("SELECT id, title, body, author, created_at FROM blog ")
+    blogs = cur.fetchall()
+    
+    return render_template('admin/blog.html', blogs = blogs)
+    
 
 @app.route('/logout')
 def logout():
