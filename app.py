@@ -117,9 +117,29 @@ def login():
             flash("Username is incorrect.", 'danger')
     return render_template('login.html')
 
-@app.route('/dashboard')
+class BlogForm(Form):
+    title = StringField('Title', [validators.Length(min=1, max=50)])
+    body = TextAreaField('Body', [validators.Length(min=10)])
+  
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    return render_template('admin/dashboard.html')
+    form = BlogForm(request.form)
+    if request.method == "POST" and form.validate():
+        title = form.title.data
+        body = form.body.data
+        author = 1
+        # OPEN SQL CONNECTION
+        cur = mysql.connection.cursor()     
+               
+        cur.execute("INSERT INTO blog (title, body, author) VALUES (%s, %s, %s)", (title, body, author ))
+        # SAVE TO DATABASE
+        mysql.connection.commit()        
+        cur.close
+        flash("Blog post was successful.", 'success')
+        return redirect(url_for('dashboard'))
+    else:        
+        return render_template('admin/dashboard.html', form=form)
+
 
 
 @app.route('/logout')
