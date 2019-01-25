@@ -59,7 +59,17 @@
         <div class="col-md-8">
             <h4> COLM News </h4>
             <hr>
-            <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
+            <div class="row">
+                {% for blog in blogs %}
+                <div class="card mx-2" style="width: 25rem;">
+                    <img src="{{ url_for('static', filename='img/showcase1.jpg')}}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h6> {{ blog.title }} </h6>
+                    </div>
+                </div>                    
+                {% endfor %}
+            </div>
+            
         </div>        
         <div class="col-md-4">
             <h4> Announcements </h4>

@@ -24,7 +24,11 @@ mysql =  MySQL(app)
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    cur = mysql.connection.cursor() 
+    cur.execute("SELECT id, title, body, author, created_at FROM blog LIMIT 6 ")
+    blogs = cur.fetchall()
+    
+    return render_template('home.html', blogs = blogs)
 
 ###### REGISTER FORM ########
 class RegisterForm(Form):
