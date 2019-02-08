@@ -3,6 +3,14 @@
     background-color: #006633; 
 } */
 
+.title-bar {
+    background: url(../img/about.jpeg) no-repeat 0 -400px;
+    background-position: cover;
+    padding-bottom: 10px;
+    height: 35vh;
+    width: 100%;
+    color: #ffffff; 
+}
 section {
     padding: 60px 0;
 }
