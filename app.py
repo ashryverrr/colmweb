@@ -106,10 +106,14 @@ def login():
             #GET PASSWORD HASH
             data = cur.fetchone()
             password = data['password']
+            firstName = data['firstName']
+            lastName = data['lastName']
             #VALIDATE PASSWORD
             if sha256_crypt.verify(password_candidate, password):
                 session['logged_in'] = True
                 session['username'] = username
+                session['fullName'] = firstName + ' ' + lastName
+                
                 
                 flash("Your are now logged in.", 'success')
                 return redirect(url_for('dashboard'))
