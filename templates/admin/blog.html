@@ -18,30 +18,34 @@
 <section class="content">
   <!-- Default box -->
   {% include '/includes/_messages.html' %} 
-  {% for blog in blogs %}
-  <div class="box">        
-        <div class="box-header with-border">
-        
-          <h3 class="box-title"> {{ blog.title }}</h3>
+  {% if blogs > 0 %}
+    {% for blog in blogs %}
+    <div class="box">        
+          <div class="box-header with-border">
+          
+            <h3 class="box-title"> {{ blog.title }}</h3>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                    title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                      title="Collapse">
+                <i class="fa fa-minus"></i></button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                <i class="fa fa-times"></i></button>
+            </div>
           </div>
+          <div class="box-body">      
+              {{ blog.body }}
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <!-- Created by: {{ blog.author }} on {{ blog.created_at}} -->
+            <button class="btn btn-success btn-sm"> Update </button> <button class="btn btn-danger btn-sm"> Delete </button>
+          </div>
+          <!-- /.box-footer-->
         </div>
-        <div class="box-body">      
-            {{ blog.body }}
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          <!-- Created by: {{ blog.author }} on {{ blog.created_at}} -->
-          <button class="btn btn-success btn-sm"> Update </button> <button class="btn btn-danger btn-sm"> Delete </button>
-        </div>
-        <!-- /.box-footer-->
-      </div>
-      <!-- /.box -->
-    {% endfor %} 
+        <!-- /.box -->
+      {% endfor %} 
+    {% else %}
+        <h1> No blog post available </h1>
+  {% endif %}
 {% endblock %}
